@@ -1,6 +1,6 @@
 const express = require("express")
 const userRouter = express.Router()
-const { getUser, createUser,updateUser,deleteUser } = require('../controllers/userController.js');
+const { getUser, createUser,updateUser,deleteUser } = require('../controllers/usersController.js');
 
 userRouter.route("/")
 .post(async (req, res) => {
