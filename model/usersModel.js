@@ -13,6 +13,17 @@ async function getUser(id) {
   }
 }
 
+async function getUserByEmail(email) {
+  try {
+    const sql = 'SELECT * FROM users where email=?';
+    const result = await pool.query(sql, [email]);
+    console.log(result[0]);
+    return result[0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function createUser(lastName, firstName, email, phone, city, street, password) {
   try {
     const sql = `INSERT INTO users (lastName,firstName,email,phone) values('${lastName}','${firstName}','${email}','${phone}')`;
@@ -82,4 +93,4 @@ async function deleteAddress(id) {
   const result = await pool.query(sql, [id]);
 }
 
-module.exports = { getUser, createUser, updateUser, deleteUser }
+module.exports = { getUser,getUserByEmail, createUser, updateUser, deleteUser }

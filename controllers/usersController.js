@@ -16,6 +16,14 @@ async function getUser(id) {
   }
 }
 
+async function getUserByEmail(email) {
+  try {
+    return model.getUserByEmail(email);
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function updateUser(id, lastName, firstName, email, phone, city, street, password) {
   try {
     return model.updateUser(id, lastName, firstName, email, phone, city, street, password);
@@ -31,4 +39,4 @@ async function deleteUser(id) {
   }
 }
 
-module.exports = { getUser, createUser, updateUser, deleteUser }
+module.exports = { getUser, getUserByEmail,createUser, updateUser, deleteUser }

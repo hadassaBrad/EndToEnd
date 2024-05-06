@@ -1,0 +1,71 @@
+.modal-container {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.modal {
+  border-radius: 5px;
+  padding: 2rem;
+  background-color: floralwhite;
+  width: 800px;
+  margin: auto;
+}
+
+.modal .btn {
+  display: block;
+  margin: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  font-size: 1rem;
+  height: 25px;
+}
+
+.form-group label {
+  margin-bottom: 0.2rem;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #df4759;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.completeModal {
+  width: 20px;
+}
+
+.showComments {
+  margin-bottom: 10px;
+}
+
+.close {
+  background-color: rgb(196, 177, 153);
+  margin-top: 10px;
+}
+
+.form-group>textarea{
+  height: 100px;
+}

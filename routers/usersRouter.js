@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
-router.use (express.json());
-router.use(express.urlencoded({ extended: true }));
+const userRouter = express.Router();
+userRouter.use (express.json());
+userRouter.use(express.urlencoded({ extended: true }));
 const { getUser, createUser,updateUser,deleteUser } = require('../controllers/usersController.js');
 
 userRouter.route("/")
@@ -26,5 +26,10 @@ userRouter
         const id = req.params.id;
         const user = await deleteUser(id);
     })
-
+    userRouter.route(":email")
+    .get(async (req, res) => {
+        const email = req.params.email;
+        const user = await getUserByEmail(email);
+        res.send(user);
+    })
 module.exports = userRouter;

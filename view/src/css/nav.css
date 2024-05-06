@@ -1,0 +1,81 @@
+@import url(https://dl.dropboxusercontent.com/u/15746367/fonts/carmela/style.css);
+@import url(https://fonts.googleapis.com/earlyaccess/alefhebrew.css);
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
+@import url(https://fonts.google.com/specimen/Shantell+Sans);
+@import url(https://fonts.google.com/specimen/Tilt+Neon);
+
+
+
+nav {
+    height: 28%;
+    font-size: 0;
+    display: flex;
+    align-items: flex-end;
+    background-color:rgb(196, 176, 151);
+    padding: 0;
+    justify-content: space-evenly;
+}
+
+
+nav a {
+    font-size: 22px;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    text-shadow: 0 0 1px;
+    padding: 10px 20px 13px 20px;
+}
+
+
+nav a:hover {
+    transform: scale(1.2);
+}
+
+nav a {
+    transition: 0.7s;
+}
+
+nav>a>img {
+    width: 1.5em;
+    margin-top: 8px;
+    padding-bottom: 0px;
+}
+.user:hover {
+  animation-name: rotate;
+  animation-duration: 0.7s;
+  animation-direction: alternate;
+}
+
+.userName{
+    font-size: small;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width:500px) {
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+     
+    }
+    nav a{
+        font-size: 17px;
+        padding: 6px;
+        
+    }
+}
+.svg{
+    width:20px;
+    height: 20px;
+    margin-left: 35%;
+}

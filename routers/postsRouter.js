@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
-router.use (express.json());
-router.use(express.urlencoded({ extended: true }));
+const postRouter = express.Router();
+postRouter.use (express.json());
+postRouter.use(express.urlencoded({ extended: true }));
 const { getPost, createPost,updatePost,deletePost } = require('../controllers/postsController.js');
 
 postRouter.route("/")

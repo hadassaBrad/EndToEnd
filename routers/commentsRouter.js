@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
-router.use (express.json());
-router.use(express.urlencoded({ extended: true }));
+const commentRouter = express.Router();
+commentRouter.use (express.json());
+commentRouter.use(express.urlencoded({ extended: true }));
 const { getComment, createComment,updateComment,deleteComment } = require('../controllers/commentsController.js');
 
 commentRouter.route("/")

@@ -1,0 +1,106 @@
+.table-wrapper {
+  width: 100%;
+}
+
+.table {
+  display: block;
+  overflow: hidden;
+  table-layout: fixed;
+  border-collapse: collapse;
+  box-shadow: 0px 10px 10px #ccc;
+  border-radius: 5px;
+  white-space: nowrap;
+  width: 75em;
+  max-width: 80%;
+  margin: auto;
+  table-layout: auto;
+  overflow-x: auto;
+  row-gap: 4px;
+  margin-bottom: 5%;
+}
+
+.table thead {
+  background-color: rgb(196, 177, 153);
+  color: #222;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 1.5rem;
+
+}
+
+.table td {
+  border-top: 0.5px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.table tr{
+  width:100%;
+}
+
+.table tbody tr:hover {
+  background-color: whitesmoke;
+}
+
+.expand {
+  width: 80%;
+  height: 30px;
+}
+
+.label {
+  border-radius: 3px;
+  padding: 0.3rem;
+  color: white;
+}
+
+.label-draft {
+  background-color: #777;
+}
+
+.label-live {
+  background-color: #42a942;
+}
+
+.label-error {
+  background-color: #d9534f;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions svg {
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: black;
+}
+
+.edit-btn {
+  color: #4D4D4D;
+  margin-left: 20px;
+  margin-right: 15px;
+
+}
+
+input[type=checkbox] {
+  accent-color: #4D4D4D;
+}
+
+.number {
+  width: 10%;
+  padding-left: 30px;
+}
+
+.albums {
+  width: 25%;
+}
+td>a {
+  color:#4D4D4D ;
+  text-decoration: underline;
+}
