@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 // import config from '..../config/config';
+//במקום WEBSITE לשים את הקוד 
 
 
 const SignUp = ({ setUser }) => {
@@ -21,8 +22,7 @@ const SignUp = ({ setUser }) => {
             return;
         }
         //${config.PORT}
-       // const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
-       const foundUser = await fetch(`http://localhost:7787/users/${email}`)
+       const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
        .then(async response => await response.json())
         if (foundUser.length != 0) {
             setSignUpError('This email already exist, please choose another one');
