@@ -10,8 +10,10 @@ const CompleteRegisteration = ({ setUser }) => {
     const [completeRegError, setCompleteRegError] = useState('');
     const [formData, setFormData] = useState({
         id: '',
-        name: '',
-        email: '',
+        lastName: '',
+        firstName: '',
+        email: user.email,
+        password: user.password,
         address: {
             street: '',
             city: ''
@@ -19,20 +21,22 @@ const CompleteRegisteration = ({ setUser }) => {
         phone: ''
     });
 
+    
     const handleSubmit = async (e) => {
-        let userHidden;
         e.preventDefault();
-        if (checkIsNotEmpty() && ValidateEmail() && validatePhone()) {
-            bcrypt.hash(formData.website, 10, (err, hashedPassword) => {
-                if (err) {
-                    setCompleteRegError(err);
-                } else {
-                    userHidden = {
-                        ...formData,
-                        website: hashedPassword,
-                    };
-                }
-            });
+        let userHidden;
+        if (checkIsNotEmpty() && validatePhone()) {
+            // bcrypt.hash(formData.password, 10, (err, hashedPassword) => {
+            //     if (err) {
+            //         setCompleteRegError(err);
+            //     } else {
+            //         userHidden = {
+            //             ...formData,
+            //             password: hashedPassword,
+            //         };
+            //     }
+            // });
+            userHidden={...formData};
             try {
                 const response = await fetch("http://localhost:7787/users", {
                     method: "POST",
@@ -40,10 +44,10 @@ const CompleteRegisteration = ({ setUser }) => {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(userHidden),
                 });
                 const result = await response.json();
-               // localStorage.setItem('currentUser', JSON.stringify({ ...userHidden, id: result.id }));
+                localStorage.setItem('currentUser', JSON.stringify({ ...userHidden, id: result.id }));
                 setUser({ ...userHidden, id: result.id });
             }
             catch (error) {
@@ -52,16 +56,6 @@ const CompleteRegisteration = ({ setUser }) => {
             navigate('/home', { replace: true });
         }
     };
-
-    const ValidateEmail = () => {
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if ((formData.email).match(mailformat)) {
-            return true;
-        } else {
-            setCompleteRegError("You have entered an invalid email address!");
-            return false;
-        }
-    }
 
     const validatePhone = () => {
         const phoneNumberRegex = /^[0-9]{10}$/;
@@ -75,7 +69,7 @@ const CompleteRegisteration = ({ setUser }) => {
     }
 
     const checkIsNotEmpty = () => {
-        if (!formData.name || !formData.email || !formData.address.city ||!formData.address.street || !formData.phone ) {
+        if (!formData.firstName ||!formData.lastName || !formData.email || !formData.address.city ||!formData.address.street || !formData.phone ) {
             setCompleteRegError("One or more of the details are empty");
             return;
         }
@@ -88,14 +82,21 @@ const CompleteRegisteration = ({ setUser }) => {
             <form >
                 <h3>Private Details:</h3>
                 <label>
-                    Name:
-                    <input type="text" className='input' value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} />
+                    First Name:
+                    <input type="text" className='input' value={formData.firstName} onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))} />
                 </label>
-                
                 <br />
+
+                <h3>Private Details:</h3>
+                <label>
+                    Last Name:
+                    <input type="text" className='input' value={formData.lastName} onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))} />
+                </label>
+                <br />
+
                 <label>
                     Email:
-                    <input className='input' type="email" name="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} />
+                    <input className='input disable' type="email" name="email" disabled={true} value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} />
                 </label>
                 <br />
                 <label>
@@ -105,7 +106,7 @@ const CompleteRegisteration = ({ setUser }) => {
                 <br />
                 <label>
                     Password:
-                    <input className='input disable' type="password" name="website" disabled={true} value={user.website} />
+                    <input className='input disable' type="password" name="password" disabled={true} value={user.password} />
                 </label>
                 <br />
 

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 // import config from '..../config/config';
 //במקום WEBSITE לשים את הקוד 
 
-
 const SignUp = ({ setUser }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -21,6 +20,10 @@ const SignUp = ({ setUser }) => {
             setSignUpError('The passwords are not the same');
             return;
         }
+        if(!ValidateEmail()){
+            return;
+        }
+
         //${config.PORT}
        const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
        .then(async response => await response.json())
@@ -28,8 +31,18 @@ const SignUp = ({ setUser }) => {
             setSignUpError('This email already exist, please choose another one');
             return;
         }
-        setUser({ username: email, website: password });
+        setUser({ email: email, password: password });
         navigate('/completeRegisteration', { replace: true });
+    }
+
+    const ValidateEmail = () => {
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if ((email).match(mailformat)) {
+            return true;
+        } else {
+            setSignUpError("You have entered an invalid email address!");
+            return false;
+        }
     }
 
     return (

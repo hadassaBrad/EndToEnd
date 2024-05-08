@@ -13,7 +13,7 @@ const Home = ({ setUser }) => {
       {user && (<>
         <Header setUser={setUser} />
         {location.pathname == '/home' &&
-          (<h2 className='welcome'>{`Welcome ${user.name}!`}</h2>)}
+          (<h2 className='welcome'>{`Welcome ${user.firstName} ${user.lastName}!`}</h2>)}
         <Outlet />
       </>)}
     </>
