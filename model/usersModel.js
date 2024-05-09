@@ -5,7 +5,7 @@ const pool = require('../DB');
 async function getUser(id) {
   try {
     //const sql = 'SELECT * FROM users where user_id=? natural join adresses';
-    const sql = 'SELECT * FROM users NATURAL JOIN addresses WHERE users.user_id = ?';
+    const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords WHERE users.user_id = ?';
     const result = await pool.query(sql, [id]);
     return result[0][0];
   } catch (err) {

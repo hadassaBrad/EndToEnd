@@ -5,13 +5,14 @@ userRouter.use(express.urlencoded({ extended: true }));
 const { getUser, createUser,updateUser,deleteUser,getUserByEmail } = require('../controllers/usersController.js');
 
 userRouter.route("/")
-.get(async (req, res) => {
-    const email = req.query.email;
-    const user = await getUserByEmail(email);
-    res.send(user);
-})
+// .get(async (req, res) => {
+//     const email = req.query.email;
+//     const user = await getUserByEmail(email);
+//     res.send(user);
+// })
 .post(async (req, res) => {
         const user = await createUser(req.body.lastName, req.body.firstName, req.body.email,req.body.phone,req.body.address.city,req.body.address.street,req.body.password);
+       console.log(user);
         res.send(user);
 })
 

@@ -2,7 +2,15 @@ const model = require('../model/usersModel');
 
 async function createUser(lastName, firstName, email, phone, city, street, password) {
   try {
-    return model.createUser(lastName, firstName, email, phone, city, street, password);
+    const result = model.getUserByEmail(email);
+    if (result[0] != null){
+      return;
+    }
+    else{
+     const tt=model.createUser(lastName, firstName, email, phone, city, street, password);
+     console.log(`fghfh${tt}`);
+     return tt;
+    }
   } catch (err) {
     throw err;
   }
@@ -39,4 +47,4 @@ async function deleteUser(id) {
   }
 }
 
-module.exports = { getUser, getUserByEmail,createUser, updateUser, deleteUser }
+module.exports = { getUser, getUserByEmail, createUser, updateUser, deleteUser }
