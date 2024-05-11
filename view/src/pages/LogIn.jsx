@@ -22,8 +22,15 @@ const LogIn = ({ setUser }) => {
             setLoginError('Please fill in all fields.');
             return;
         }
-        const foundUser = await fetch(`http://localhost:7787/users?username=${userName}`)
-            .then(async response => await response.json());
+        // const foundUser = await fetch(`http://localhost:7787/users?username=${userName}`)
+        const response = await fetch("http://localhost:7787/users", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user),
+        }).then(async response => await response.json());
         if (foundUser.length == 0) {
             setLoginError("You are not exist in the system, please sign up");
         }

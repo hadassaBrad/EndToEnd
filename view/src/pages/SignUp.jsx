@@ -20,18 +20,40 @@ const SignUp = ({ setUser }) => {
             setSignUpError('The passwords are not the same');
             return;
         }
-        if(!ValidateEmail()){
-            return;
-        }
+        // if (!ValidateEmail()) {
+        //     return;
+        // }
 
         //${config.PORT}
-       const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
-       .then(async response => await response.json())
-        if (foundUser.length != 0) {
-            setSignUpError('This email already exist, please choose another one');
+        //    const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
+        //    .then(async response => await response.json())
+
+        const user = {
+            lastName: '',
+            firstName: '',
+            email: email,
+            password: password,
+            address: {
+                street: '',
+                city: ''
+            },
+            phone: ''
+        }
+        const response = await fetch("http://localhost:7787/users", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user),
+        });
+        const result = await response.json();
+        
+        if (response == "") {
+            setSignUpError('This email already exist, please login');
             return;
         }
-        setUser({ email: email, password: password });
+        setUser({ id: result.insertId, email: email, password: password });
         navigate('/completeRegisteration', { replace: true });
     }
 

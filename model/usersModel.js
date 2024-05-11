@@ -17,7 +17,6 @@ async function getUserByEmail(email) {
   try {
     const sql = 'SELECT * FROM users where email=?';
     const result = await pool.query(sql, [email]);
-    console.log(result[0]);
     return result[0];
   } catch (err) {
     console.log(err);
@@ -30,15 +29,13 @@ async function createUser(lastName, firstName, email, phone, city, street, passw
     const result = await pool.query(sql);
     createAddress(result[0].insertId, city, street);
     createPassword(result[0].insertId, password);
-    // return result[0][0];
-    // return result[0][0];
+    return result[0];
   } catch (err) {
     console.log(err);
   }
 }
 
 async function createPassword(id,password){
-  console.log(password);
   const sql = `INSERT INTO passwords (user_id,password) values('${id}','${password}')`;
   const result = await pool.query(sql);
 }  
@@ -55,7 +52,7 @@ async function updateUser(id, lastName, firstName, email, phone, city, street, p
     const result = await pool.query(sql, [lastName,firstName, email, phone, id]);
     updateAddress(id, city, street);
     updatePassword(id, password);
-    return result[0][0];
+    return result[0];
   } catch (err) {
     console.log(err);
   }

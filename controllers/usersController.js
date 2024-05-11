@@ -3,14 +3,30 @@ const model = require('../model/usersModel');
 async function createUser(lastName, firstName, email, phone, city, street, password) {
   try {
     const result = model.getUserByEmail(email);
-    if (result[0] != null){
-      return;
-    }
-    else{
-     const tt=model.createUser(lastName, firstName, email, phone, city, street, password);
-     console.log(`fghfh${tt}`);
-     return tt;
-    }
+    // if(result.then){
+
+    // }
+    return model.createUser(lastName, firstName, email, phone, city, street, password);
+
+    // const result = model.getUserByEmail(email);
+    // result.then(async result => {
+    //   if (result.length != 0) {
+    //     return "";
+    //   } else {
+    //      const r= await model.createUser(lastName, firstName, email, phone, city, street, password);
+    //       console.log("hhh",r);
+    //       return r;
+    //     }
+    // }).catch(error => {
+    //   console.error("שגיאה בביצוע הבקשה:", error);
+    // });
+
+    // if (result != []){
+    //   return "";//res.status(400).send();
+    // }
+    // else{
+    //   console.log("else");
+    // }
   } catch (err) {
     throw err;
   }

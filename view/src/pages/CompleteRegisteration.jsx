@@ -9,7 +9,7 @@ const CompleteRegisteration = ({ setUser }) => {
     const navigate = useNavigate();
     const [completeRegError, setCompleteRegError] = useState('');
     const [formData, setFormData] = useState({
-        id: '',
+        id: user.id,
         lastName: '',
         firstName: '',
         email: user.email,
@@ -24,6 +24,7 @@ const CompleteRegisteration = ({ setUser }) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user.id);
         let userHidden;
         if (checkIsNotEmpty() && validatePhone()) {
             // bcrypt.hash(formData.password, 10, (err, hashedPassword) => {
@@ -38,8 +39,8 @@ const CompleteRegisteration = ({ setUser }) => {
             // });
             userHidden={...formData};
             try {
-                const response = await fetch("http://localhost:7787/users", {
-                    method: "POST",
+                const response = await fetch(`http://localhost:7787/users/${user.id}`, {
+                    method: "PUT",
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ const CompleteRegisteration = ({ setUser }) => {
                 });
                 const result = await response.json();
                 localStorage.setItem('currentUser', JSON.stringify({ ...userHidden, id: result.id }));
-                setUser({ ...userHidden, id: result.id });
+                setUser({ ...userHidden});
             }
             catch (error) {
                 setCompleteRegError("Error:", error);

@@ -12,7 +12,6 @@ userRouter.route("/")
 // })
 .post(async (req, res) => {
         const user = await createUser(req.body.lastName, req.body.firstName, req.body.email,req.body.phone,req.body.address.city,req.body.address.street,req.body.password);
-       console.log(user);
         res.send(user);
 })
 
