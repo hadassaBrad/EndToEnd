@@ -5,9 +5,13 @@ import Comments from "./Comments";
 
 const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
 
+    
+    // if(defaultValue!=null){
+    //     defaultValue=serverGetRow(defaultValue);
+    // }
     const navigate = useNavigate();
     const [formState, setFormState] = useState(
-        defaultValue || {
+        defaultValue  || {
             title: "",
             body: ""
         }

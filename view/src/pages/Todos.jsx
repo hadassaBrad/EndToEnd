@@ -27,14 +27,17 @@ const Todos = () => {
 
 
    const getTodos=async()=> {
-    const todos = await fetch(`http://localhost:3000/todos?userId=${user.id}`)
+    const todos = await fetch(`http://localhost:7787/todos?user_id=${user.id}`)
       .then(async response => await response.json());
+      setTodosList(todos && todos.map(todo => {
+        return { id: todo.todo_id? todo.todo_id: todo.id, title: todo.title, completed: todo.completed }
+      }));
     setTodosList(todos);
   }
 
   const fillTodosListFiltered = () => {
     setTodosListFiltered(todosList && todosList.map(todo => {
-      return { id: todo.id, title: todo.title, completed: todo.completed }
+      return { id: todo.todo_id? todo.todo_id: todo.id, title: todo.title, completed: todo.completed }
     }));
   }
 
@@ -86,7 +89,7 @@ const Todos = () => {
 
   const handleDeleteRow = (idDelete) => {
     if (confirm("Are you sure you want to delete?")) {
-      fetch(`http://localhost:3000/todos/${idDelete}`, {
+      fetch(`http://localhost:7787/todos/${idDelete}`, {
         method: 'DELETE',
       });
       setTodosListFiltered(todosListFiltered.filter(todo => todo.id !== idDelete));
@@ -100,14 +103,19 @@ const Todos = () => {
   };
 
   const handleSubmit = async (newRow) => {
+    if(newRow.completed){
+      newRow = {  ...newRow,completed:1 };
+    }else{
+      newRow = {  ...newRow,completed:0 };
+    }
     if (rowToEdit === null) {
-      newRow = { userId: user.id, ...newRow };
+      newRow = { user_id: user.id, ...newRow };
       const newId = await serverPostRow(newRow);
       const todo = { id: newId, ...newRow }
       setTodosList([...todosListFiltered, todo]);//for new row
     }
     else {
-      const todo = { userId: user.id, ...newRow }
+      const todo = { user_id: user.id, ...newRow }
       serverPutRow(todo);
       setTodosList(
         todosListFiltered.map(currRow => {
@@ -121,7 +129,7 @@ const Todos = () => {
 
   const serverPutRow = (todo) => {
     const putRequest =
-      fetch(`http://localhost:3000/todos/${todo.id}`, {
+      fetch(`http://localhost:7787/todos/${todo.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(todo)
@@ -129,16 +137,15 @@ const Todos = () => {
   };
 
    const serverPostRow=async(todo)=> {
-    const response = await fetch(`http://localhost:3000/todos`, {
+    const response = await fetch(`http://localhost:7787/todos`, {
       method: 'POST',
       body: JSON.stringify(todo),
       headers: {
         'Content-Type': 'application/json'
       }
     });
-
     const data = await response.json();
-    return data.id;
+    return data.insertId;
   };
 
   return (
@@ -195,7 +202,7 @@ const Todos = () => {
             setRowToEdit(null);
           }}
           onSubmit={handleSubmit}
-          defaultValue={rowToEdit !== null && todosList.filter(row => row.id == rowToEdit ? row : null)[0]}
+          defaultValue={rowToEdit !== null && todosList.filter(row => row.id== rowToEdit||row.todo_id&&row.todo_id == rowToEdit ? row : null)[0]}
         />
       )}
     </>

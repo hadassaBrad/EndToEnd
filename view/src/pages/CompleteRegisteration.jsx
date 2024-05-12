@@ -48,8 +48,8 @@ const CompleteRegisteration = ({ setUser }) => {
                     body: JSON.stringify(userHidden),
                 });
                 const result = await response.json();
-                localStorage.setItem('currentUser', JSON.stringify({ ...userHidden, id: result.id }));
-                setUser({ ...userHidden});
+                localStorage.setItem('currentUser', JSON.stringify({ ...userHidden, id: user.id }));
+                setUser({ ...userHidden,id:user.id});
             }
             catch (error) {
                 setCompleteRegError("Error:", error);

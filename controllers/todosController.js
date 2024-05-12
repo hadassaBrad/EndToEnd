@@ -8,9 +8,9 @@ async function createTodo(userId,title,completed) {
   }
 }
 
-async function getTodo(id) {
+async function getTodos(id) {
   try {
-    return model.getTodo(id);
+    return model.getTodos(id);
   } catch (err) {
     throw err;
   }
@@ -31,4 +31,4 @@ async function deleteTodo(id) {
   }
 }
 
-module.exports = { getTodo, createTodo, updateTodo, deleteTodo }
+module.exports = { getTodos, createTodo, updateTodo, deleteTodo }

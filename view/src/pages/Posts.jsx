@@ -25,7 +25,7 @@ const Posts = () => {
   }, [postsList]);
 
   const getPosts = async () => {
-    const posts = await fetch(`http://localhost:3000/posts?userId=${user.id}`)
+    const posts = await fetch(`http://localhost:7787/posts?user_id=${user.id}`)
       .then(async response => await response.json());
     setPostsList(posts);
   }
@@ -61,7 +61,7 @@ const Posts = () => {
   const handleDeleteRow = (idDelete) => {
     if (confirm("Are you sure you want to delete?")) {
       setPostsList(postsList.filter(post => post.id !== idDelete));
-      fetch(`http://localhost:3000/posts/${idDelete}`, {
+      fetch(`http://localhost:7787/posts/${idDelete}`, {
         method: 'DELETE',
       });
     }
@@ -102,7 +102,7 @@ const Posts = () => {
 
   const serverPutRow = (post) => {
     const putRequest =
-      fetch(`http://localhost:3000/posts/${post.id}`, {
+      fetch(`http://localhost:7787/posts/${post.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(post)
@@ -110,7 +110,7 @@ const Posts = () => {
   };
 
   async function serverPostRow(post) {
-    const response = await fetch(`http://localhost:3000/posts`, {
+    const response = await fetch(`http://localhost:7787/posts`, {
       method: 'POST',
       body: JSON.stringify(post),
       headers: {
@@ -121,6 +121,13 @@ const Posts = () => {
     const data = await response.json();
     return data.id;
   };
+
+  async function serverGetRow(id) {
+    const post = await fetch(`http://localhost:7787/posts/${id}`)
+      .then(async response => await response.json());
+      const objectPost={id:post.id,title:post.title,body:post.body}
+    return objectPost;
+};
 
   return (
     <>
@@ -153,7 +160,9 @@ const Posts = () => {
             setShowRow(false);
           }}
           onSubmit={handleSubmit}
-          defaultValue={rowToEdit !== null && postsList.filter(row => row.id == rowToEdit ? row : null)[0]}
+          defaultValue={rowToEdit!== null?serverGetRow(rowToEdit):null}
+          //{id:1,title:"gg",body:"jjj"}
+          //defaultValue={rowToEdit !== null && postsList.filter(row => row.id == rowToEdit ? row : null)[0]}
         />
       )}
     </>

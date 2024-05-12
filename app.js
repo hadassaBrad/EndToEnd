@@ -10,6 +10,8 @@ const app = express();
 
 app.use(express.json());
 const cors = require('cors'); 
+const todoRouter = require('./routers/todosRouter');
+const postRouter = require('./routers/postsRouter');
 app.use(cors());
 
 
@@ -41,6 +43,18 @@ app.use('/users', (req, res, next)=>{
         console.log('user');
         next(); 
  },userRouter);
+
+ app.use('/todos', (req, res, next)=>{
+    console.log('todo');
+    next(); 
+},todoRouter);
+
+app.use('/posts', (req, res, next)=>{
+    console.log('post');
+    next(); 
+},postRouter);
+
+
 
 app.listen(config.PORT, ()=>{
     console.log(`app is listening on port ${config.PORT}`)

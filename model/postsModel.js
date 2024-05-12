@@ -5,9 +5,19 @@
 const pool = require('../DB');
 async function getPost(id) {
   try {
-    const sql = 'SELECT * FROM posts where post_id=?';
+    const sql = 'SELECT * FROM posts where id=?';
     const result = await pool.query(sql, [id]);
     return result[0][0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getPosts(id) {
+  try {
+    const sql = 'SELECT id,title FROM posts where user_id=?';
+    const result = await pool.query(sql, [id]);
+    return result[0];
   } catch (err) {
     console.log(err);
   }
@@ -25,7 +35,7 @@ async function createPost(userId,title,body) {
 
 async function updatePost(id,userId,title,body) {
   try {
-    const sql = `UPDATE posts SET user_id = ?,title = ?,body = ? WHERE post_id = ?`;
+    const sql = `UPDATE posts SET user_id = ?,title = ?,body = ? WHERE id = ?`;
     const result = await pool.query(sql, [userId,title,body,id]);
     return result[0][0];
   } catch (err) {
@@ -35,7 +45,7 @@ async function updatePost(id,userId,title,body) {
 
 async function deletePost(id) {
   try {
-    const sql = 'DELETE FROM posts where post_id=?';
+    const sql = 'DELETE FROM posts where id=?';
     const result = await pool.query(sql, [id]);
     return result[0][0];
   } catch (err) {
@@ -43,4 +53,4 @@ async function deletePost(id) {
   }
 }
 
-module.exports = { getPost, createPost, updatePost, deletePost }
+module.exports = { getPost,getPosts, createPost, updatePost, deletePost }

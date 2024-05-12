@@ -24,7 +24,7 @@ userRouter
     })  
     .put(async(req, res) => {
         const id = req.params.id;
-        const user = await updateUser(id,req.body.lastName, req.body.firstName, req.body.email,req.body.phone,req.body.city,req.body.street,req.body.password);
+        const user = await updateUser(id,req.body.lastName, req.body.firstName, req.body.email,req.body.phone,req.body.address.city,req.body.address.street,req.body.password);
         res.send(user);
     })
     .delete(async(req, res) => {

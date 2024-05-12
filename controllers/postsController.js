@@ -8,6 +8,14 @@ async function createPost(userId,title,body) {
   }
 }
 
+async function getPosts(id) {
+  try {
+    return model.getPosts(id);
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getPost(id) {
   try {
     return model.getPost(id);
@@ -31,4 +39,4 @@ async function deletePost(id) {
   }
 }
 
-module.exports = { getPost, createPost, updatePost, deletePost }
+module.exports = { getPost,getPosts, createPost, updatePost, deletePost }
