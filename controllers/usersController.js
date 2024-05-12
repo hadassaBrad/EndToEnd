@@ -63,4 +63,18 @@ async function deleteUser(id) {
   }
 }
 
-module.exports = { getUser, getUserByEmail, createUser, updateUser, deleteUser }
+async function postLogin(email,password) {
+  try {
+    const result=  await model.getUser(email);
+    if(result!=null){
+   if(result.password==password)
+    return result;
+  else
+  throw err;
+    }
+   
+  } catch (err) {
+    throw err;
+  }
+}
+module.exports = {postLogin, getUser, getUserByEmail, createUser, updateUser, deleteUser }
