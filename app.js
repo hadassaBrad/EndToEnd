@@ -12,7 +12,7 @@ app.use(express.json());
 const cors = require('cors'); 
 const todoRouter = require('./routers/todosRouter');
 const postRouter = require('./routers/postsRouter');
-const loginRouter=require ('./routers/loginRouter');
+const loginRouter= require ('./routers/loginRouter');
 app.use(cors());
 
 
@@ -56,7 +56,7 @@ app.use('/posts', (req, res, next)=>{
 },postRouter);
 
 app.use('/login', (req, res, next)=>{
-    console.log('user');
+    console.log('login');
     next(); 
 },loginRouter);
 

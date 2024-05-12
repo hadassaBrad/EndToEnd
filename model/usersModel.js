@@ -2,11 +2,11 @@
 //כשמקבלים משתמש האם צריך לדעת גם את הכתובת והקוד
 
 const pool = require('../DB');
-async function getUser(id) {
+async function getUser(email) {
   try {
     //const sql = 'SELECT * FROM users where user_id=? natural join adresses';
-    const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords WHERE users.user_id = ?';
-    const result = await pool.query(sql, [id]);
+    const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords WHERE users.email = ?';
+    const result = await pool.query(sql, [email]);
     return result[0][0];
   } catch (err) {
     console.log(err);
