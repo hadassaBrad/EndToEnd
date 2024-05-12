@@ -122,12 +122,6 @@ const Posts = () => {
     return data.id;
   };
 
-  async function serverGetRow(id) {
-    const post = await fetch(`http://localhost:7787/posts/${id}`)
-      .then(async response => await response.json());
-      const objectPost={id:post.id,title:post.title,body:post.body}
-    return objectPost;
-};
 
   return (
     <>
@@ -160,7 +154,7 @@ const Posts = () => {
             setShowRow(false);
           }}
           onSubmit={handleSubmit}
-          defaultValue={rowToEdit!== null?serverGetRow(rowToEdit):null}
+          defaultValue={rowToEdit}
           //{id:1,title:"gg",body:"jjj"}
           //defaultValue={rowToEdit !== null && postsList.filter(row => row.id == rowToEdit ? row : null)[0]}
         />

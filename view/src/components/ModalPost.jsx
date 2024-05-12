@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/modal.css";
 import { useNavigate } from 'react-router-dom';
 import Comments from "./Comments";
 
 const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
 
-    
-    // if(defaultValue!=null){
-    //     defaultValue=serverGetRow(defaultValue);
-    // }
-    const navigate = useNavigate();
     const [formState, setFormState] = useState(
-        defaultValue  || {
+        defaultValue || {
             title: "",
             body: ""
         }
     );
+    async function serverGetRow(id) {
+        const post = await fetch(`http://localhost:7787/posts/${id}`)
+            .then(async response => await response.json());
+        return { id: post.id, title: post.title, body: post.body };
+    };
+    useEffect(() => {
+        async function fetchData() {
+            const postData = await serverGetRow(defaultValue);
+            setFormState(postData);
+        }
+        defaultValue? fetchData(): setFormState({
+            title: "",
+            body: ""
+        });
+        // defaultValue ? setFormState(u) :
+        //     setFormState({
+        //         title: "",
+        //         body: ""
+        //     });
+    }, []);
+    const navigate = useNavigate();
+
     const [error, setError] = useState("");
     const [commentsOpen, setCommentsOpen] = useState(false);
     const [showCommentBtnShow, setShowCommentBtnShow] = useState(disabled);
