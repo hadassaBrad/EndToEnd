@@ -32,12 +32,13 @@ const LogIn = ({ setUser }) => {
             body: JSON.stringify({ email: email, password: password }),
         }).then(async response => await response.json());
 
-        if (response !== 0) {
+        if (response.ok) {
             localStorage.setItem('currentUser', JSON.stringify(response));
             setUser(response);
             navigate('/home', { replace: true });
         } else {
-            setLoginError("You are not exist in the system, please sign up");
+            console.log(response)
+            setLoginError(response);
         }
     }
 

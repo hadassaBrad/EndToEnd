@@ -3,17 +3,34 @@ const model = require('../model/usersModel');
 async function createUser(lastName, firstName, email, phone, city, street, password) {
   try {
     const result = await model.getUserByEmail(email);
-    console.log("uhuh",result.length);
-  if(result.length!=0){
-    throw err;
-  }
+    if (result.length != 0) {
+      throw err;
+    }
     return model.createUser(lastName, firstName, email, phone, city, street, password);
 
   } catch (err) {
     throw err;
   }
 }
+async function postLogin(email, password) {
+  try {
+    const result = await model.getUser(email);
+    if (result.length != 0) {
+      let error = new Error("not Exsist");
+      throw error.message;
+    }
+    if (result.password != password) {
+      let error = new Error("not valid password");
+      throw error.message;
+    }
+    else
+      return result;
 
+  }
+  catch (err) {
+    throw err;
+  }
+}
 async function getUser(id) {
   try {
     return model.getUser(id);
@@ -45,18 +62,5 @@ async function deleteUser(id) {
   }
 }
 
-async function postLogin(email, password) {
-  try {
-    const result = await model.getUser(email);
-    if (result != null) {
-      if (result.password == password)
-        return result;
-      else
-        throw err;
-    }
 
-  } catch (err) {
-    throw err;
-  }
-}
 module.exports = { postLogin, getUser, getUserByEmail, createUser, updateUser, deleteUser }
