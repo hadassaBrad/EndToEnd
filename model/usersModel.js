@@ -7,7 +7,7 @@ async function getUser(email) {
     //const sql = 'SELECT * FROM users where user_id=? natural join adresses';
     const sql = 'SELECT * FROM users NATURAL JOIN addresses NATURAL JOIN passwords WHERE users.email = ?';
     const result = await pool.query(sql, [email]);
-    return result[0][0];
+    return result[0];
   } catch (err) {
     console.log(err);
   }

@@ -15,17 +15,16 @@ async function createUser(lastName, firstName, email, phone, city, street, passw
 async function postLogin(email, password) {
   try {
     const result = await model.getUser(email);
-    if (result.length != 0) {
-      let error = new Error("not Exsist");
-      throw error.message;
+    if (result.length == 0) {
+      throw new Error("not Exsist");
     }
-    if (result.password != password) {
-      let error = new Error("not valid password");
-      throw error.message;
+    if (result[0].password != password) {
+      console.log(password,result[0].password)
+      throw new Error("not valid password");
     }
-    else
-      return result;
-
+    else{
+      return result[0];
+    }
   }
   catch (err) {
     throw err;
