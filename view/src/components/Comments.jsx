@@ -54,7 +54,7 @@ const Comments = ({ postId }) => {
     else {
       const comment = { postId: postId, ...newRow }
       setCommentListFiltered(
-        commentList.map(currRow => {
+        commentListFiltered.map(currRow => {
           if (currRow.id !== newRow.id)
             return currRow;
           return newRow;
