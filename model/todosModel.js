@@ -25,7 +25,7 @@ async function createTodo(userId,title,completed) {
 
 async function updateTodo(id,userId,title,completed) {
   try {
-    const sql = `UPDATE todos SET user_id = ?,title = ?,completed = ? WHERE todo_id = ?`;
+    const sql = `UPDATE todos SET user_id = ?,title = ?,completed = ? WHERE id = ?`;
     const result = await pool.query(sql, [userId,title,completed,id]);
     return result[0];
   } catch (err) {
@@ -35,7 +35,7 @@ async function updateTodo(id,userId,title,completed) {
 
 async function deleteTodo(id) {
   try {
-    const sql = 'DELETE FROM todos where todo_id=?';
+    const sql = 'DELETE FROM todos where id=?';
     const result = await pool.query(sql, [id]);
     return result[0];
   } catch (err) {

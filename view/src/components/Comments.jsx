@@ -17,7 +17,7 @@ const Comments = ({ postId }) => {
   }, [commentList]);
 
   const getComments = async () => {
-    const comments = await fetch(`http://localhost:3000/comments?postId=${postId}`)
+    const comments = await fetch(`http://localhost:7787/comments?post_id=${postId}`)
       .then(async response => await response.json());
     setCommentList(comments);
   }
@@ -31,7 +31,7 @@ const Comments = ({ postId }) => {
   const handleDeleteRow = (idDelete) => {
     if (confirm("Are you sure you want to delete?")) {
       setCommentListFiltered(commentListFiltered.filter(comment => comment.id !== idDelete));
-      fetch(`http://localhost:3000/comments/${idDelete}`, {
+      fetch(`http://localhost:7787/comments/${idDelete}`, {
         method: 'DELETE',
       });
     }
@@ -45,7 +45,7 @@ const Comments = ({ postId }) => {
     if (!newRow.id) {
       newRow = { postId: postId, ...newRow };
       serverPostRow(newRow).then(data => {
-        const { id } = data;
+        const id = data.insertId;
         const comment = { id, ...newRow }
         setCommentListFiltered([...commentListFiltered, comment]);//for new row
       });
@@ -65,7 +65,7 @@ const Comments = ({ postId }) => {
   };
 
   const serverPutRow = (comment) => {
-    fetch(`http://localhost:3000/comments/${comment.id}`, {
+    fetch(`http://localhost:7787/comments/${comment.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(comment)
@@ -73,7 +73,7 @@ const Comments = ({ postId }) => {
   };
 
   const serverPostRow = (comment) => {
-    return fetch('http://localhost:3000/comments', {
+    return fetch('http://localhost:7787/comments', {
       method: 'POST',
       body: JSON.stringify(comment),
       headers: {

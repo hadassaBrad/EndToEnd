@@ -7,6 +7,13 @@ async function createComment(postId,name,email,body) {
     throw err;
   }
 }
+async function getComments(id){
+  try {
+    return model.getComments(id);
+  } catch (err) {
+    throw err;
+  }
+}
 
 async function getComment(id) {
   try {
@@ -31,4 +38,4 @@ async function deleteComment(id) {
   }
 }
 
-module.exports = { getComment, createComment, updateComment, deleteComment }
+module.exports = {getComments, getComment, createComment, updateComment, deleteComment }

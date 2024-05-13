@@ -11,8 +11,14 @@ userRouter.route("/")
 //     res.send(user);
 // })
 .post(async (req, res) => {
+      try{ 
         const user = await createUser(req.body.lastName, req.body.firstName, req.body.email,req.body.phone,req.body.address.city,req.body.address.street,req.body.password);
+        
         res.send(user);
+    }
+      catch{
+            res.status(401).send("this user is already exist, please login");
+      }
 })
 
 userRouter

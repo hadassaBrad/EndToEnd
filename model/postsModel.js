@@ -27,7 +27,7 @@ async function createPost(userId,title,body) {
   try {
     const sql = `INSERT INTO posts (user_id,title,body) values('${userId}','${title}','${body}')`;
     const result = await pool.query(sql);
-    return result[0][0];
+    return result[0];
   } catch (err) {
     console.log(err);
   }
@@ -37,7 +37,7 @@ async function updatePost(id,userId,title,body) {
   try {
     const sql = `UPDATE posts SET user_id = ?,title = ?,body = ? WHERE id = ?`;
     const result = await pool.query(sql, [userId,title,body,id]);
-    return result[0][0];
+    return result[0];
   } catch (err) {
     console.log(err);
   }

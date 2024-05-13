@@ -13,6 +13,7 @@ const cors = require('cors');
 const todoRouter = require('./routers/todosRouter');
 const postRouter = require('./routers/postsRouter');
 const loginRouter= require ('./routers/loginRouter');
+const commentRouter = require('./routers/commentsRouter');
 app.use(cors());
 
 
@@ -54,6 +55,11 @@ app.use('/posts', (req, res, next)=>{
     console.log('post');
     next(); 
 },postRouter);
+
+app.use('/comments', (req, res, next)=>{
+    console.log('comment');
+    next(); 
+},commentRouter);
 
 app.use('/login', (req, res, next)=>{
     console.log('login');

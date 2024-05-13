@@ -39,22 +39,45 @@ const SignUp = ({ setUser }) => {
             },
             phone: ''
         }
-        const response = await fetch("http://localhost:7787/users", {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user),
-        });
-        const result = await response.json();
+        // const response = await fetch("http://localhost:7787/users", {
+        //     method: "POST",
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(user),
+        // });
+        // const result = await response.json();
         
-        if (response == "") {
+        // if (response.status == 401) {
+        //     setSignUpError('This email already exist, please login');
+        //     return;
+        // }
+        try {
+            const response = await fetch("http://localhost:7787/users", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user),
+            });
+        
+            // זה יזרוק שגיאה אם הקוד של התגובה לא יהיה 2xx (הצלחה)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        
+            const result = await response.json();
+            setUser({ id: result.insertId, email: email, password: password });
+            navigate('/completeRegisteration', { replace: true });
+          
+        } catch (error) {
+          
             setSignUpError('This email already exist, please login');
             return;
         }
-        setUser({ id: result.insertId, email: email, password: password });
-        navigate('/completeRegisteration', { replace: true });
+      
     }
 
     const ValidateEmail = () => {

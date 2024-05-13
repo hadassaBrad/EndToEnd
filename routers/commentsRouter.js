@@ -2,12 +2,17 @@ const express = require("express");
 const commentRouter = express.Router();
 commentRouter.use (express.json());
 commentRouter.use(express.urlencoded({ extended: true }));
-const { getComment, createComment,updateComment,deleteComment } = require('../controllers/commentsController.js');
+const { getComments,getComment, createComment,updateComment,deleteComment } = require('../controllers/commentsController.js');
 
 commentRouter.route("/")
 .post(async (req, res) => {
         const comment = await createComment(req.body.postId,req.body.name,req.body.email,req.body.body);
         res.send(comment);
+})
+.get(async (req, res) => {
+    const id = req.query.post_id;
+    const comments = await getComments(id);
+    res.send(comments);
 })
 
 commentRouter

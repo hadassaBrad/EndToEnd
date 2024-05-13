@@ -3,7 +3,7 @@ import "../css/modal.css";
 import { useNavigate } from 'react-router-dom';
 import Comments from "./Comments";
 
-const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
+const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue=null }) => {
 
     const [formState, setFormState] = useState(
         defaultValue || {
@@ -25,11 +25,6 @@ const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
             title: "",
             body: ""
         });
-        // defaultValue ? setFormState(u) :
-        //     setFormState({
-        //         title: "",
-        //         body: ""
-        //     });
     }, []);
     const navigate = useNavigate();
 
@@ -102,7 +97,7 @@ const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
                     </div>
                     {showCommentBtnShow && (<button type="button" className="btn showComments" onClick={handleShowComments}>Show Comments</button>)}
                     {commentsOpen && (
-                        <Comments postId={defaultValue.id} />
+                        <Comments postId={defaultValue} />
                     )}
                     {error && <div className="error">{error}</div>}
                     {disabled ? <button type="button" className="close" onClick={closeModal}>

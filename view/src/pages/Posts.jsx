@@ -82,13 +82,13 @@ const Posts = () => {
 
   async function handleSubmit(newRow) {
     if (rowToEdit === null) {
-      newRow = { userId: user.id, ...newRow };
+      newRow = { user_id: user.id, ...newRow };
       const newId = await serverPostRow(newRow);
       const post = { userId: user.id, id: newId, ...newRow }
       setPostsList([...postsList, post]);//change the source and change the filtered by useeffect
     }
     else {
-      const post = { userId: user.id, ...newRow }
+      const post = { user_id: user.id, ...newRow }
       setPostsList(
         postsList.map(currRow => {
           if (currRow.id !== rowToEdit)
@@ -119,7 +119,7 @@ const Posts = () => {
     });
 
     const data = await response.json();
-    return data.id;
+    return data.insertId;
   };
 
 
