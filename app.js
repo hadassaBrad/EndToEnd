@@ -61,7 +61,7 @@ app.use('/comments', (req, res, next)=>{
     next(); 
 },commentRouter);
 
-app.use('/login', (req, res, next)=>{
+app.use('/login', (err,req, res, next)=>{
     console.log('login');
     next(); 
 },loginRouter);
