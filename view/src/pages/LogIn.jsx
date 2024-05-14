@@ -31,7 +31,9 @@ const LogIn = ({ setUser }) => {
                 body: JSON.stringify({ email: email, password: password }),
             });
             if (!response.ok) {
-                throw new Error(response.text());
+                const errorText = await response.text(); // קבלת הודעת שגיאה כטקסט
+                throw new Error(errorText); // זריקת שגיאה עם ההודעה
+               
             }else{
                 const result = await response.json();
                 localStorage.setItem('currentUser', JSON.stringify(result));
@@ -40,6 +42,7 @@ const LogIn = ({ setUser }) => {
             }  
         } catch (err) {
             console.log("err",err);
+    
             setLoginError(err.message);
         }
     }
