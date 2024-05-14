@@ -1,7 +1,4 @@
-//מה צריך להחזיר בכל פונקציה ומה צריך לבדוק מבחינת 404
-//כשמקבלים משתמש האם צריך לדעת גם את הכתובת והקוד
-//האם אני צריכה להוסיף פה את השאילתה לקבל את כל המטלות ע"פ התז. של המשתמש
-//אם מוחקים פוסט צריך למחוק את כל הערות עליו
+
 const pool = require('../DB');
 async function getPost(id) {
   try {
@@ -9,7 +6,7 @@ async function getPost(id) {
     const result = await pool.query(sql, [id]);
     return result[0][0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -19,7 +16,7 @@ async function getPosts(id) {
     const result = await pool.query(sql, [id]);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -29,7 +26,7 @@ async function createPost(userId,title,body) {
     const result = await pool.query(sql);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -39,17 +36,19 @@ async function updatePost(id,userId,title,body) {
     const result = await pool.query(sql, [userId,title,body,id]);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
 async function deletePost(id) {
   try {
+    const sql1 = 'DELETE FROM comments where post_id=?';
+    const result1 = await pool.query(sql1, [id]);
     const sql = 'DELETE FROM posts where id=?';
     const result = await pool.query(sql, [id]);
     return result[0][0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 

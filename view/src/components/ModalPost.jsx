@@ -3,8 +3,7 @@ import "../css/modal.css";
 import { useNavigate } from 'react-router-dom';
 import Comments from "./Comments";
 
-const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue=null }) => {
-
+const ModalPost = ({ disabled, closeModal, onSubmit, defaultValue }) => {
     const [formState, setFormState] = useState(
         defaultValue || {
             title: "",

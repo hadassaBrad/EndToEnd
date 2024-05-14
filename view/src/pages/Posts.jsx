@@ -155,8 +155,6 @@ const Posts = () => {
           }}
           onSubmit={handleSubmit}
           defaultValue={rowToEdit}
-          //{id:1,title:"gg",body:"jjj"}
-          //defaultValue={rowToEdit !== null && postsList.filter(row => row.id == rowToEdit ? row : null)[0]}
         />
       )}
     </>

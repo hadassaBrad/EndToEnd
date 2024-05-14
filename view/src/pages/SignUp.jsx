@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
-// import config from '..../config/config';
-//במקום WEBSITE לשים את הקוד 
 
 const SignUp = ({ setUser }) => {
     const navigate = useNavigate();
@@ -20,13 +18,6 @@ const SignUp = ({ setUser }) => {
             setSignUpError('The passwords are not the same');
             return;
         }
-        // if (!ValidateEmail()) {
-        //     return;
-        // }
-
-        //${config.PORT}
-        //    const foundUser = await fetch(`http://localhost:7787/users?email=${email}`)
-        //    .then(async response => await response.json())
 
         const user = {
             lastName: '',
@@ -39,20 +30,7 @@ const SignUp = ({ setUser }) => {
             },
             phone: ''
         }
-        // const response = await fetch("http://localhost:7787/users", {
-        //     method: "POST",
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(user),
-        // });
-        // const result = await response.json();
         
-        // if (response.status == 401) {
-        //     setSignUpError('This email already exist, please login');
-        //     return;
-        // }
         try {
             const response = await fetch("http://localhost:7787/users", {
                 method: "POST",
@@ -63,7 +41,6 @@ const SignUp = ({ setUser }) => {
                 body: JSON.stringify(user),
             });
         
-            // זה יזרוק שגיאה אם הקוד של התגובה לא יהיה 2xx (הצלחה)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -77,7 +54,6 @@ const SignUp = ({ setUser }) => {
             setSignUpError('This email already exist, please login');
             return;
         }
-      
     }
 
     const ValidateEmail = () => {

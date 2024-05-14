@@ -31,18 +31,26 @@ const LogIn = ({ setUser }) => {
                 body: JSON.stringify({ email: email, password: password }),
             });
             if (!response.ok) {
-                const errorText = await response.text(); 
-                throw new Error(errorText); 
-               
-            }else{
+                const errorText = await response.text();
+                throw new Error(errorText);
+
+            } else {
                 const result = await response.json();
-                localStorage.setItem('currentUser', JSON.stringify(result));
-                setUser(result);
+                const user = { id: result.user_id,
+                    lastName: result.lastName,
+                    firstName: result.firstName,
+                    email: result.email,
+                    password: result.password,
+                    address: {
+                        street: result.street,
+                        city: result.city
+                            },
+                    phone: result.phone }; 
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                setUser(user); 
                 navigate('/home', { replace: true });
-            }  
+            }
         } catch (err) {
-            console.log("err",err);
-    
             setLoginError(err.message);
         }
     }

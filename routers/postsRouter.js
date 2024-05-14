@@ -7,7 +7,6 @@ const { getPost,getPosts, createPost,updatePost,deletePost } = require('../contr
 postRouter.route("/")
 .get(async (req, res) => {
     const id = req.query.user_id;
-    console.log(id);
     const post = await getPosts(id);
     res.send(post);
 })

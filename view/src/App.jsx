@@ -6,9 +6,7 @@ import Home from './pages/Home';
 import CompleteRegisteration from './pages/CompleteRegisteration';
 import Info from './pages/Info';
 import Posts from './pages/Posts';
-import Albums from './pages/Albums';
 import Todos from './pages/Todos';
-import Album from './pages/Album';
 import './css/App.css'
 export const UserContext = createContext();
 
@@ -34,11 +32,7 @@ function App() {
                   <Route path=":id" element={<Posts />} />
                 </Route>
               </Route>
-              <Route path="users/:id/albums" element={<Albums />} />
-              <Route path="users/:id/albums/:id/photos" element={<Album/>} />
-              <Route path="users/:id/albums/:id/photos/:id" element={<Album/>} />
             </Route>
-
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

@@ -24,14 +24,6 @@ CREATE TABLE passwords (
   FOREIGN KEY (user_id) REFERENCES users (user_id)
  );
  
-CREATE TABLE albums (
-  id INT AUTO_INCREMENT,
-  user_id INT,
-  title varchar(50),
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES users (user_id)
- );
- 
  CREATE TABLE posts (
   id INT AUTO_INCREMENT,
   user_id INT,

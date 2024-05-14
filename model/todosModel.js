@@ -1,6 +1,3 @@
-//מה צריך להחזיר בכל פונקציה ומה צריך לבדוק מבחינת 404
-//כשמקבלים משתמש האם צריך לדעת גם את הכתובת והקוד
-//האם אני צריכה להוסיף פה את השאילתה לקבל את כל המטלות ע"פ התז. של המשתמש
 
 const pool = require('../DB');
 async function getTodos(id) {
@@ -9,7 +6,7 @@ async function getTodos(id) {
     const result = await pool.query(sql, [id]);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -19,7 +16,7 @@ async function createTodo(userId,title,completed) {
     const result = await pool.query(sql);
      return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -29,7 +26,7 @@ async function updateTodo(id,userId,title,completed) {
     const result = await pool.query(sql, [userId,title,completed,id]);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 
@@ -39,7 +36,7 @@ async function deleteTodo(id) {
     const result = await pool.query(sql, [id]);
     return result[0];
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 }
 

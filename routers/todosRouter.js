@@ -20,7 +20,6 @@ todoRouter
     .get(async (req, res) => {
         const id = req.params.id;
         const todos = await getTodos(id);
-        console.log(todos);
         res.send(todos);
     })
     .put(async(req, res) => {

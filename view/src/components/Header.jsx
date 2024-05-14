@@ -31,10 +31,7 @@ const Header = ({ setUser }) => {
       >
         Posts
       </Link>
-      <Link to={`/home/users/${user.id}/albums`}
-      >
-        Albums
-      </Link>
+      
       <Link onClick={logOut} to="/login"
       >
         Log out
