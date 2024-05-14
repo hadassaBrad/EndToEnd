@@ -3,6 +3,7 @@ const loginRouter = express.Router();
 loginRouter.use (express.json());
 loginRouter.use(express.urlencoded({ extended: true }));
 const { postLogin } = require('../controllers/usersController.js');
+
 loginRouter.route("/")
 .post(async (req, res) => {
     try{   

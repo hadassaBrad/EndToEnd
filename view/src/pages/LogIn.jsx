@@ -31,8 +31,8 @@ const LogIn = ({ setUser }) => {
                 body: JSON.stringify({ email: email, password: password }),
             });
             if (!response.ok) {
-                const errorText = await response.text(); // קבלת הודעת שגיאה כטקסט
-                throw new Error(errorText); // זריקת שגיאה עם ההודעה
+                const errorText = await response.text(); 
+                throw new Error(errorText); 
                
             }else{
                 const result = await response.json();

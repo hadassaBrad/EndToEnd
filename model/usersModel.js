@@ -25,6 +25,7 @@ async function getUserByEmail(email) {
 
 async function createUser(lastName, firstName, email, phone, city, street, password) {
   try {
+    console.log("password in model",password);
     const sql = `INSERT INTO users (lastName,firstName,email,phone) values('${lastName}','${firstName}','${email}','${phone}')`;
     const result = await pool.query(sql);
     createAddress(result[0].insertId, city, street);
@@ -36,6 +37,7 @@ async function createUser(lastName, firstName, email, phone, city, street, passw
 }
 
 async function createPassword(id,password){
+  console.log("password in create password",password," the id: ",id);
   const sql = `INSERT INTO passwords (user_id,password) values('${id}','${password}')`;
   const result = await pool.query(sql);
 }  
